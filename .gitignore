@@ -1,0 +1,44 @@
+# Maven build output
+/target/
+
+# IDEA files
+*.iml
+.idea/
+
+# Eclipse files
+.project
+.classpath
+.settings/
+
+# NetBeans files
+/nbproject/
+
+# VS Code files
+.vscode/
+
+# Maven Wrapper files
+mvnw.cmd
+mvnw
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+*~
+*.tmp
+*.swp
+
+# dependency directories
+/node_modules/
+
+# generated jars and classes
+*.class
+*.jar
+
+# others
+*.bak
+*.orig
