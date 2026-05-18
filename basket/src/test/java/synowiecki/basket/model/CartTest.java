@@ -47,7 +47,7 @@ class CartTest {
         cart.addProduct(new Product("P2", "Mouse", 150));
 
         cart.addPromotion(new PercentagePromotion(300, 0.05));
-        cart.addPromotion(new FreeGiftPromotion(200, "Mug"));
+        cart.addPromotion(new FreeGiftPromotion(250, "Mug"));
         cart.addPromotion(new CouponPromotion("ABC", 0.3));
 
         PromotionResult result = cart.applyPromotions();

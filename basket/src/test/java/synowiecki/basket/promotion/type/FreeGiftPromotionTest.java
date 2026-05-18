@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FreeGiftPromotionTest {
 
-    private final FreeGiftPromotion promotion = new FreeGiftPromotion(200, "Mug");
+    private final FreeGiftPromotion promotion = new FreeGiftPromotion(250, "Mug");
 
     @Test
     void shouldReturnGiftWhenTotalExceedsThreshold() {
