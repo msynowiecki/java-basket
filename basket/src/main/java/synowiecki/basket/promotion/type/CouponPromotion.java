@@ -11,13 +11,22 @@ import synowiecki.basket.promotion.PromotionResult;
 
 public class CouponPromotion implements Promotion {
 
+    private final String productCode;
+    private final double rate;
+
+    public CouponPromotion(String productCode, double rate) {
+        this.productCode = productCode;
+        this.rate = rate;
+    }
+
+    @Override
     public PromotionResult apply(List<Product> products) {
 
         List<Discount> discounts = new ArrayList<>();
 
         for (Product product : products) {
-            if (product.getCode().equals("ABC")) {
-                discounts.add(new Discount("30%", product.getPrice() * 0.3));
+            if (productCode.equals(product.getCode())) {
+                discounts.add(new Discount(rate * 100 + "%", product.getPrice() * rate));
             }
         }
 

@@ -1,8 +1,8 @@
 package synowiecki.basket.promotion.type;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 import synowiecki.basket.model.Discount;
 import synowiecki.basket.model.Product;
@@ -12,21 +12,31 @@ import synowiecki.basket.promotion.PromotionResult;
 
 public class GetMorePromotion implements Promotion {
 
+    private final int buy;
+    private final int free;
+
+    public GetMorePromotion(int buy, int free) {
+        this.buy = buy;
+        this.free = free;
+    }
+
     @Override
     public PromotionResult apply(List<Product> products) {
 
-        if (products.size() < 3) {
+        List<Product> valid = products.stream()
+                .filter(Objects::nonNull)
+                .sorted(Comparator.comparingDouble(Product::getPrice))
+                .toList();
+
+        if (valid.size() < buy + free) {
             return new PromotionResult(List.of(), List.of());
         }
 
-        List<Product> sorted = new ArrayList<>(products);
-        sorted.sort(Comparator.comparingDouble(Product::getPrice));
-
-        Product free = sorted.get(0);
+        Product freeProduct = valid.get(free - 1);
 
         return new PromotionResult(
-            List.of(new Discount("2+1", free.getPrice())),
-            List.of()
+                List.of(new Discount(buy + "+" + free, freeProduct.getPrice())),
+                List.of()
         );
     }
 }

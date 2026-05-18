@@ -11,22 +11,31 @@ import synowiecki.basket.promotion.PromotionResult;
 
 public class PercentagePromotion implements Promotion {
 
+    private final double threshold;
+    private final double rate;
+
+    public PercentagePromotion(double threshold, double rate) {
+        this.threshold = threshold;
+        this.rate = rate;
+    }
+
+    @Override
     public PromotionResult apply(List<Product> products) {
 
         double total = products.stream()
-            .filter(Objects::nonNull)
-            .mapToDouble(Product::getPrice)
-            .sum();
+                .filter(Objects::nonNull)
+                .mapToDouble(Product::getPrice)
+                .sum();
 
-        if (total <= 300) {
+        if (total <= threshold) {
             return new PromotionResult(List.of(), List.of());
         }
 
-        double discount = total * 0.05;
+        double discount = total * rate;
 
         return new PromotionResult(
-            List.of(new Discount("5%", discount)),
-            List.of()
+                List.of(new Discount(rate * 100 + "%", discount)),
+                List.of()
         );
     }
 }
