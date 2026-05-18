@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PercentagePromotionTest {
 
-    private final PercentagePromotion promotion = new PercentagePromotion();
+    private final PercentagePromotion promotion = new PercentagePromotion(300, 0.05);
 
     @Test
     void shouldReturnNoDiscountWhenTotalIsNotAboveThreshold() {

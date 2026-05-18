@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CouponPromotionTest {
 
-    private final CouponPromotion promotion = new CouponPromotion();
+    private final CouponPromotion promotion = new CouponPromotion("ABC", 0.3);
 
     @Test
     void shouldApplyCouponToMatchingProductCode() {

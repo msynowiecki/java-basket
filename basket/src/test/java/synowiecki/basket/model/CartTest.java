@@ -46,9 +46,9 @@ class CartTest {
         cart.addProduct(new Product("ABC", "Laptop", 200));
         cart.addProduct(new Product("P2", "Mouse", 150));
 
-        cart.addPromotion(new PercentagePromotion());
-        cart.addPromotion(new FreeGiftPromotion());
-        cart.addPromotion(new CouponPromotion());
+        cart.addPromotion(new PercentagePromotion(300, 0.05));
+        cart.addPromotion(new FreeGiftPromotion(200, "Mug"));
+        cart.addPromotion(new CouponPromotion("ABC", 0.3));
 
         PromotionResult result = cart.applyPromotions();
 
@@ -60,7 +60,7 @@ class CartTest {
     @Test
     void shouldAllowRemovingPromotions() {
         Cart cart = new Cart();
-        PercentagePromotion percentage = new PercentagePromotion();
+        PercentagePromotion percentage = new PercentagePromotion(300, 0.05);
 
         cart.addPromotion(percentage);
         cart.removePromotion(percentage);

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GetMorePromotionTest {
 
-    private final GetMorePromotion promotion = new GetMorePromotion();
+    private final GetMorePromotion promotion = new GetMorePromotion(2, 1);
 
     @Test
     void shouldReturnNoDiscountForLessThanThreeProducts() {
