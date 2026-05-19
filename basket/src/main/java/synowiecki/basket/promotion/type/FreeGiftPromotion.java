@@ -22,9 +22,9 @@ public class FreeGiftPromotion implements Promotion {
     public PromotionResult apply(List<Product> products, List<Product> used) {
 
         double total = products.stream()
-                .filter(Objects::nonNull)
-                .mapToDouble(Product::getPrice)
-                .sum();
+            .filter(Objects::nonNull)
+            .mapToDouble(Product::getPrice)
+            .sum();
 
         if (total >= threshold) {
             return new PromotionResult(List.of(), List.of(gift), List.of());
