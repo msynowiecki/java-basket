@@ -64,6 +64,7 @@ public class Cart {
             .sum();
 
         double discounted = result.getDiscounts().stream()
+            .filter(Objects::nonNull)
             .mapToDouble(Discount::getAmount)
             .sum();
 
