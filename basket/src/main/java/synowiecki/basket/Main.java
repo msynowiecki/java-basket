@@ -8,7 +8,6 @@ import synowiecki.basket.model.Product;
 import synowiecki.basket.promotion.PromotionResult;
 import synowiecki.basket.promotion.type.CouponPromotion;
 import synowiecki.basket.promotion.type.FreeGiftPromotion;
-import synowiecki.basket.promotion.type.GetMorePromotion;
 import synowiecki.basket.promotion.type.PercentagePromotion;
 
 public class Main {
