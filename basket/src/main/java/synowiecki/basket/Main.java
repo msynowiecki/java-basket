@@ -31,7 +31,6 @@ public class Main {
         cart.addPromotion(new PercentagePromotion(300, 0.10));
         cart.addPromotion(new FreeGiftPromotion(250, new Product("GFT", "Sticker Pack", 0)));
         cart.addPromotion(new CouponPromotion("MSE", 0.50, "HALFOFF"));
-        cart.addPromotion(new GetMorePromotion(2, 1));
 
         System.out.println("=== Shopping Cart Example ===");
         System.out.println("Products in cart:");
