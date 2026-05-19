@@ -11,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CouponPromotionTest {
 
-    private final CouponPromotion promotion = new CouponPromotion("ABC", 0.3);
+    private final CouponPromotion promotion = new CouponPromotion("ABC", 0.3, "ABC");
 
     @Test
     void shouldApplyCouponToMatchingProductCode() {
         PromotionResult result = promotion.apply(List.of(
             new Product("ABC", "Couponed", 200),
             new Product("P2", "Regular", 100)
-        ));
+        ), List.of());
 
         assertEquals(1, result.getDiscounts().size());
         assertEquals(60, result.getDiscounts().get(0).getAmount(), 1e-9);
@@ -29,7 +29,7 @@ class CouponPromotionTest {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 200),
             new Product("P2", "B", 100)
-        ));
+        ), List.of());
 
         assertTrue(result.getDiscounts().isEmpty());
         assertTrue(result.getGifts().isEmpty());

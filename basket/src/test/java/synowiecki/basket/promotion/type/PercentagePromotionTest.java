@@ -18,7 +18,7 @@ class PercentagePromotionTest {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 100),
             new Product("P2", "B", 200)
-        ));
+        ), List.of());
 
         assertTrue(result.getDiscounts().isEmpty());
         assertTrue(result.getGifts().isEmpty());
@@ -29,7 +29,7 @@ class PercentagePromotionTest {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 150),
             new Product("P2", "B", 200)
-        ));
+        ), List.of());
 
         assertEquals(1, result.getDiscounts().size());
         assertEquals(17.5, result.getDiscounts().get(0).getAmount(), 1e-9);

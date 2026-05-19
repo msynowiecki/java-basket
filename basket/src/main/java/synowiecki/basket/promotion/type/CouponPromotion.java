@@ -11,25 +11,34 @@ import synowiecki.basket.promotion.PromotionResult;
 
 public class CouponPromotion implements Promotion {
 
-    private final String productCode;
+    private final String code;
     private final double rate;
+    private final String coupon;
 
-    public CouponPromotion(String productCode, double rate) {
-        this.productCode = productCode;
+    public CouponPromotion(String code, double rate, String coupon) {
+        this.code = code;
         this.rate = rate;
+        this.coupon = coupon;
     }
 
     @Override
-    public PromotionResult apply(List<Product> products) {
+    public PromotionResult apply(List<Product> products, List<Product> used) {
 
         List<Discount> discounts = new ArrayList<>();
+        List<Product> applied = new ArrayList<>();
 
         for (Product product : products) {
-            if (productCode.equals(product.getCode())) {
-                discounts.add(new Discount(rate * 100 + "%", product.getPrice() * rate));
+
+            boolean matchingProduct = code.equals(product.getCode());
+            boolean alreadyUsed = used.contains(product);
+
+            if (matchingProduct && !alreadyUsed) {
+                discounts.add(new Discount(coupon, product.getPrice() * rate));
+                applied.add(product);
+                break;
             }
         }
 
-        return new PromotionResult(discounts, List.of());
+        return new PromotionResult(discounts, List.of(), applied);
     }
 }

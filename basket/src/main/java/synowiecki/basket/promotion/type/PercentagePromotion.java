@@ -20,7 +20,7 @@ public class PercentagePromotion implements Promotion {
     }
 
     @Override
-    public PromotionResult apply(List<Product> products) {
+    public PromotionResult apply(List<Product> products, List<Product> used) {
 
         double total = products.stream()
                 .filter(Objects::nonNull)
@@ -28,13 +28,14 @@ public class PercentagePromotion implements Promotion {
                 .sum();
 
         if (total <= threshold) {
-            return new PromotionResult(List.of(), List.of());
+            return new PromotionResult(List.of(), List.of(), List.of());
         }
 
         double discount = total * rate;
 
         return new PromotionResult(
                 List.of(new Discount(rate * 100 + "%", discount)),
+                List.of(),
                 List.of()
         );
     }

@@ -41,34 +41,31 @@ public class Cart {
     public PromotionResult applyPromotions() {
 
         List<Discount> discounts = new ArrayList<>();
-        List<String> gifts = new ArrayList<>();
+        List<Product> gifts = new ArrayList<>();
+        List<Product> used = new ArrayList<>();
 
         for (Promotion promotion : promotions) {
-            PromotionResult result = promotion.apply(products);
+            PromotionResult result = promotion.apply(products, used);
 
             discounts.addAll(result.getDiscounts());
             gifts.addAll(result.getGifts());
+            used.addAll(result.getUsed());
         }
 
-        return new PromotionResult(discounts, gifts);
+        return new PromotionResult(discounts, gifts, used);
     }
 
     public double calculateTotal() {
+        PromotionResult result = applyPromotions();
 
         double total = products.stream()
             .filter(Objects::nonNull)
             .mapToDouble(Product::getPrice)
             .sum();
 
-        double discounted = 0;
-        List<String> gifts = new ArrayList<>();
-
-        for (Promotion promotion : promotions) {
-            PromotionResult result = promotion.apply(products);
-
-            discounted += result.getDiscounts().stream().mapToDouble(Discount::getAmount).sum();
-            gifts.addAll(result.getGifts());
-        }
+        double discounted = result.getDiscounts().stream()
+            .mapToDouble(Discount::getAmount)
+            .sum();
 
         return total - discounted;
     }

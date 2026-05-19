@@ -21,7 +21,7 @@ public class GetMorePromotion implements Promotion {
     }
 
     @Override
-    public PromotionResult apply(List<Product> products) {
+    public PromotionResult apply(List<Product> products, List<Product> used) {
 
         List<Product> valid = products.stream()
                 .filter(Objects::nonNull)
@@ -29,13 +29,14 @@ public class GetMorePromotion implements Promotion {
                 .toList();
 
         if (valid.size() < buy + free) {
-            return new PromotionResult(List.of(), List.of());
+            return new PromotionResult(List.of(), List.of(), List.of());
         }
 
         Product freeProduct = valid.get(free - 1);
 
         return new PromotionResult(
                 List.of(new Discount(buy + "+" + free, freeProduct.getPrice())),
+                List.of(),
                 List.of()
         );
     }

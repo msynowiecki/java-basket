@@ -11,16 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FreeGiftPromotionTest {
 
-    private final FreeGiftPromotion promotion = new FreeGiftPromotion(250, "Mug");
+    private final Product gift = new Product("MUG", "Mug", 0);
+    private final FreeGiftPromotion promotion = new FreeGiftPromotion(250, gift);
 
     @Test
     void shouldReturnGiftWhenTotalExceedsThreshold() {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 150),
             new Product("P2", "B", 100)
-        ));
+        ), List.of());
 
-        assertEquals(List.of("Mug"), result.getGifts());
+        assertEquals(List.of(gift), result.getGifts());
         assertTrue(result.getDiscounts().isEmpty());
     }
 
@@ -29,7 +30,7 @@ class FreeGiftPromotionTest {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 100),
             new Product("P2", "B", 100)
-        ));
+        ), List.of());
 
         assertTrue(result.getGifts().isEmpty());
         assertTrue(result.getDiscounts().isEmpty());

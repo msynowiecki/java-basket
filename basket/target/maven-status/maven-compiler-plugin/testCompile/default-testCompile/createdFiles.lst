@@ -1,1 +1,10 @@
+synowiecki/basket/promotion/PromotionResultTest.class
+synowiecki/basket/service/AnalyzerTest.class
+synowiecki/basket/model/DiscountTest.class
+synowiecki/basket/model/ProductTest.class
+synowiecki/basket/promotion/type/CouponPromotionTest.class
+synowiecki/basket/comparison/ComparisonTest.class
+synowiecki/basket/promotion/type/GetMorePromotionTest.class
+synowiecki/basket/promotion/type/PercentagePromotionTest.class
+synowiecki/basket/promotion/type/FreeGiftPromotionTest.class
 synowiecki/basket/model/CartTest.class

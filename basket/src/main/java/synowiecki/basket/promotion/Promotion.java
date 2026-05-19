@@ -6,5 +6,5 @@ import synowiecki.basket.model.Product;
 
 
 public interface Promotion {
-    PromotionResult apply(List<Product> products);
+    PromotionResult apply(List<Product> products, List<Product> used);
 }

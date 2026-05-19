@@ -18,7 +18,7 @@ class GetMorePromotionTest {
         PromotionResult result = promotion.apply(List.of(
             new Product("P1", "A", 100),
             new Product("P2", "B", 200)
-        ));
+        ), List.of());
 
         assertTrue(result.getDiscounts().isEmpty());
         assertTrue(result.getGifts().isEmpty());
@@ -30,7 +30,7 @@ class GetMorePromotionTest {
             new Product("P1", "A", 300),
             new Product("P2", "B", 100),
             new Product("P3", "C", 200)
-        ));
+        ), List.of());
 
         assertEquals(1, result.getDiscounts().size());
         assertEquals(100, result.getDiscounts().get(0).getAmount());

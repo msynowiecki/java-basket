@@ -47,13 +47,14 @@ class CartTest {
         cart.addProduct(new Product("P2", "Mouse", 150));
 
         cart.addPromotion(new PercentagePromotion(300, 0.05));
-        cart.addPromotion(new FreeGiftPromotion(250, "Mug"));
-        cart.addPromotion(new CouponPromotion("ABC", 0.3));
+        Product gift = new Product("MUG", "Mug", 0);
+        cart.addPromotion(new FreeGiftPromotion(250, gift));
+        cart.addPromotion(new CouponPromotion("ABC", 0.3, "ABC"));
 
         PromotionResult result = cart.applyPromotions();
 
         assertEquals(2, result.getDiscounts().size());
-        assertEquals(List.of("Mug"), result.getGifts());
+        assertEquals(List.of(gift), result.getGifts());
         assertEquals(350 - 17.5 - 60, cart.calculateTotal(), 1e-9);
     }
 

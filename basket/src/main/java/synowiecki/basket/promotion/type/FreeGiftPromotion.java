@@ -11,15 +11,15 @@ import synowiecki.basket.promotion.PromotionResult;
 public class FreeGiftPromotion implements Promotion {
 
     private final double threshold;
-    private final String gift;
+    private final Product gift;
 
-    public FreeGiftPromotion(double threshold, String gift) {
+    public FreeGiftPromotion(double threshold, Product gift) {
         this.threshold = threshold;
-        this.gift = gift;
+        this.gift = Objects.requireNonNull(gift, "Gift product cannot be null");
     }
 
     @Override
-    public PromotionResult apply(List<Product> products) {
+    public PromotionResult apply(List<Product> products, List<Product> used) {
 
         double total = products.stream()
                 .filter(Objects::nonNull)
@@ -27,9 +27,9 @@ public class FreeGiftPromotion implements Promotion {
                 .sum();
 
         if (total >= threshold) {
-            return new PromotionResult(List.of(), List.of(gift));
+            return new PromotionResult(List.of(), List.of(gift), List.of());
         }
 
-        return new PromotionResult(List.of(), List.of());
+        return new PromotionResult(List.of(), List.of(), List.of());
     }
 }
