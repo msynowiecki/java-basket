@@ -34,18 +34,22 @@ public final class Product {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
+
         Product product = (Product) object;
+
         return Double.compare(product.price, price) == 0
-                && code.equals(product.code)
-                && name.equals(product.name);
+            && code.equals(product.code)
+            && name.equals(product.name);
     }
 
     @Override
     public int hashCode() {
         int result = code.hashCode();
         result = 31 * result + name.hashCode();
+
         long temporary = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temporary ^ (temporary >>> 32));
+        
         return result;
     }
 }

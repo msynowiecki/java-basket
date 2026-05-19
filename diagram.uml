@@ -1,0 +1,105 @@
+@startuml classDiagram
+    class Cart {
+        - List<Product> products
+        - List<Promotion> promotions
+        + void addProduct(Product)
+        + void removeProduct(Product)
+        + void addPromotion(Promotion)
+        + void removePromotion(Promotion)
+        + List<Product> getProducts()
+        + List<Promotion> getPromotions()
+        + PromotionResult applyPromotions()
+        + double calculateTotal()
+    }
+
+    class Product {
+        - String code
+        - String name
+        - double price
+        + Product(String, String, double)
+        + String getCode()
+        + String getName()
+        + double getPrice()
+        + boolean equals(Object)
+        + int hashCode()
+    }
+
+    class Discount {
+        - String name
+        - double amount
+        + Discount(String, double)
+        + String getName()
+        + double getAmount()
+    }
+
+    interface Promotion {
+        + PromotionResult apply(List<Product>, List<Product>)
+    }
+
+    class PromotionResult {
+        - List<Discount> discounts
+        - List<Product> gifts
+        - List<Product> used
+        + PromotionResult(List<Discount>, List<Product>, List<Product>)
+        + List<Discount> getDiscounts()
+        + List<Product> getGifts()
+        + List<Product> getUsed()
+    }
+
+    class CouponPromotion {
+        - String code
+        - double rate
+        - String coupon
+        + CouponPromotion(String, double, String)
+        + PromotionResult apply(List<Product>, List<Product>)
+    }
+
+    class FreeGiftPromotion {
+        - double threshold
+        - Product gift
+        + FreeGiftPromotion(double, Product)
+        + PromotionResult apply(List<Product>, List<Product>)
+    }
+
+    class PercentagePromotion {
+        - double threshold
+        - double rate
+        + PercentagePromotion(double, double)
+        + PromotionResult apply(List<Product>, List<Product>)
+    }
+
+    class GetMorePromotion {
+        - int buy
+        - int free
+        + GetMorePromotion(int, int)
+        + PromotionResult apply(List<Product>, List<Product>)
+    }
+
+    class Comparison {
+        + Comparator<Product> BY_PRICE_DESC_NAME_ASC
+        + Comparator<Product> BY_PRICE_ASC_NAME_ASC
+        + Comparator<Product> BY_NAME_ASC_PRICE_DESC
+    }
+
+    class Analyzer {
+        + List<Product> findCheapest(List<Product>, int)
+        + List<Product> findMostExpensive(List<Product>, int)
+        + List<Product> sort(List<Product>, Comparator<Product>)
+    }
+
+    Cart "1" --> "*" Product : products
+    Cart "1" --> "*" Promotion : promotions
+    Cart "1" --> "1" PromotionResult : applyPromotions()
+    PromotionResult "1" --> "*" Discount : discounts
+    PromotionResult "1" --> "*" Product : gifts
+    PromotionResult "1" --> "*" Product : used
+
+    Promotion <|.. CouponPromotion
+    Promotion <|.. FreeGiftPromotion
+    Promotion <|.. PercentagePromotion
+    Promotion <|.. GetMorePromotion
+
+    Analyzer "1" --> "*" Product : returns
+    Analyzer "1" ..> Comparison : uses
+    Comparison ..> Product : compares
+@enduml
